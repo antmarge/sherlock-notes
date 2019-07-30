@@ -1,0 +1,51 @@
+{
+    "__default__" :
+    {
+        "queue"     : "pritch,normal,owners,hns",
+        "nodes"     : 1,
+        "tasks"     : 1,
+        "memory"    : 5000,
+        "time"      : "45:00",
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.err"
+    },
+
+    "fastqc_raw":
+    {
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.err"
+    },     
+    "cutadapt":
+    {
+        "time"    : "04:00:00"
+    },
+    "mapdamage":
+    {
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.err",
+        "time"    : "01:00:00"
+    },
+    "bwa_aln":
+    {
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.err",
+       "tasks"    : "{params.threads}",
+       "memory" : "20G",
+       "time"     : "15:00:00"
+    },
+    "bwa_sampe":
+    {
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.err",
+       "time"     : "5:00:00",
+       "memory"     : "6000"
+    },
+    "bam_mapped":
+    {
+        "output"    : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.out",
+        "error"     : "{RUN_DIR}/slurm/{rule}.{wildcards.sample}.trim{wildcards.trim}.err",
+        "tasks" : "{params.threads}",
+        "time" : "02:00:00"
+    }
+}
